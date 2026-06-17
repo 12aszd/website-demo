@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pixel World — Investor Pitch · Rides in 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pixel_style.css">
+<style>
+  .specs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+  .spec{background:rgba(255,255,255,0.04);border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+  .spec b{display:block;font-size:10px;font-weight:500;color:var(--faint);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:2px}
+  .spec span{font-family:var(--cond);font-weight:600;font-size:15px}
+  .ridetype{display:inline-block;font-family:var(--cond);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#111;background:var(--yellow);border-radius:5px;padding:3px 10px;margin-bottom:12px}
+  .cambtn{position:absolute;top:12px;right:14px;z-index:5;background:rgba(7,7,9,0.7);border:1px solid var(--line2);color:#fff;font-family:var(--cond);font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:12px;padding:8px 14px;border-radius:7px;cursor:pointer;transition:.2s;backdrop-filter:blur(6px)}
+  .cambtn:hover{border-color:var(--yellow);color:var(--yellow)}
+  .cambtn.on{background:var(--yellow);color:#111;border-color:var(--yellow)}
+  .v3d .hint{bottom:12px;left:14px;right:auto}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<nav class="nav">
+  <div class="wrap nav-in">
+    <div class="brand"><span class="chip">P</span> <span>Pixel World<small>Investor Pitch</small></span></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="market.html">Market</a>
+      <a href="rides.html" class="active">Rides · 3D</a>
+      <a href="financials.html">Financials</a>
+      <a href="plan.html">Plan &amp; Team</a>
+    </div>
+    <a href="index.html#ask" class="nav-cta">The Ask</a>
+  </div>
+</nav>
+
+<header class="pagehead">
+  <div class="wrap">
+    <span class="secnum">04</span>
+    <span class="eyebrow">The Product</span>
+    <h2 class="title">Ride the coasters.<br>In 3D.</h2>
+    <div class="rule"></div>
+    <p class="lead">Three flagship coasters anchor the park, supported by 30+ attractions. Every simulation below runs the ride's real layout with real physics — slow up the lift hill, fast through the drops. <b style="color:#fff">Drag to orbit, scroll to zoom, or hit Ride Cam to sit in the front row.</b></p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+
+    <!-- MARIO -->
+    <div class="ride3d reveal">
+      <div class="ride3d-info">
+        <div class="sub">🍄 Mario Universe</div>
+        <h3>Mushroom Kingdom Express</h3>
+        <span class="ridetype">Family steel coaster · chain lift</span>
+        <p>A classic out-and-back layout: a 32-metre chain lift, a 29-metre first drop at 55°, then three airtime hills past warp pipes and ?-blocks before a sweeping turnaround at the castle.</p>
+        <img class="sprite" src="mario.png" alt="Mario" onerror="this.style.display='none'">
+        <div class="q">"Every jump counts. Every coin matters."</div>
+        <div class="specs">
+          <div class="spec"><b>Height</b><span>32 m</span></div>
+          <div class="spec"><b>First drop</b><span>29 m · 55°</span></div>
+          <div class="spec"><b>Top speed</b><span>72 km/h</span></div>
+          <div class="spec"><b>Length</b><span>820 m</span></div>
+          <div class="spec"><b>Inversions</b><span>0</span></div>
+          <div class="spec"><b>Max g-force</b><span>3.2 g</span></div>
+          <div class="spec"><b>Duration</b><span>2 min 30 s</span></div>
+          <div class="spec"><b>Capacity</b><span>1,200 / hr</span></div>
+          <div class="spec"><b>Min height</b><span>110 cm</span></div>
+        </div>
+      </div>
+      <div class="v3d" data-ride="mario">
+        <button class="cambtn" onclick="window.pwToggleCam(this)">🎥 Ride Cam</button>
+        <div class="hud">MUSHROOM KINGDOM EXPRESS<br>SPEED <span class="spd">0 KM/H</span> · HEIGHT <span class="hgt">0 M</span> · <span class="pts">0</span> COINS</div>
+        <div class="hint">drag to orbit · scroll to zoom</div>
+        <div class="fallback">3D viewer needs an internet connection to load.<br>Check your connection and refresh.</div>
+      </div>
+    </div>
+
+    <!-- SONIC -->
+    <div class="ride3d reveal">
+      <div class="ride3d-info">
+        <div class="sub">⚡ Sonic Universe</div>
+        <h3>Green Hill Zone Dash</h3>
+        <span class="ridetype">LSM launch coaster · 1 inversion</span>
+        <p>A magnetic launch fires the train from 0 to 110 km/h in 3.0 seconds, straight into a 30-metre vertical loop, an overbanked turn and a ground-hugging sprint home through the Green Hill checkerboards.</p>
+        <img class="sprite" src="sonic.png" alt="Sonic" onerror="this.style.display='none'">
+        <div class="q">"Gotta go fast. No brakes."</div>
+        <div class="specs">
+          <div class="spec"><b>Launch</b><span>0–110 in 3.0 s</span></div>
+          <div class="spec"><b>Height</b><span>38 m</span></div>
+          <div class="spec"><b>Top speed</b><span>110 km/h</span></div>
+          <div class="spec"><b>Length</b><span>1,050 m</span></div>
+          <div class="spec"><b>Inversions</b><span>1 vertical loop</span></div>
+          <div class="spec"><b>Max g-force</b><span>4.5 g</span></div>
+          <div class="spec"><b>Duration</b><span>1 min 55 s</span></div>
+          <div class="spec"><b>Capacity</b><span>1,400 / hr</span></div>
+          <div class="spec"><b>Min height</b><span>130 cm</span></div>
+        </div>
+      </div>
+      <div class="v3d" data-ride="sonic">
+        <button class="cambtn" onclick="window.pwToggleCam(this)">🎥 Ride Cam</button>
+        <div class="hud">GREEN HILL ZONE DASH<br>SPEED <span class="spd">0 KM/H</span> · HEIGHT <span class="hgt">0 M</span> · <span class="pts">0</span> RINGS</div>
+        <div class="hint">drag to orbit · scroll to zoom</div>
+        <div class="fallback">3D viewer needs an internet connection to load.<br>Check your connection and refresh.</div>
+      </div>
+    </div>
+
+    <!-- PIKACHU -->
+    <div class="ride3d reveal">
+      <div class="ride3d-info">
+        <div class="sub">⚡ Pokémon Universe</div>
+        <h3>Safari Sprint</h3>
+        <span class="ridetype">Multi-launch family thrill</span>
+        <p>A double-launch safari chase: an electric first launch into a 24-metre camelback, then low, fast swerves around a sleeping Snorlax with six airtime moments before the brake run.</p>
+        <img class="sprite" src="pikachu.png" alt="Pikachu" onerror="this.style.display='none'">
+        <div class="q">"The ride never stops. Neither do they."</div>
+        <div class="specs">
+          <div class="spec"><b>Launches</b><span>2 × LSM</span></div>
+          <div class="spec"><b>Height</b><span>24 m</span></div>
+          <div class="spec"><b>Top speed</b><span>92 km/h</span></div>
+          <div class="spec"><b>Length</b><span>940 m</span></div>
+          <div class="spec"><b>Airtime</b><span>6 moments</span></div>
+          <div class="spec"><b>Max g-force</b><span>3.6 g</span></div>
+          <div class="spec"><b>Duration</b><span>2 min 10 s</span></div>
+          <div class="spec"><b>Capacity</b><span>1,100 / hr</span></div>
+          <div class="spec"><b>Min height</b><span>120 cm</span></div>
+        </div>
+      </div>
+      <div class="v3d" data-ride="pikachu">
+        <button class="cambtn" onclick="window.pwToggleCam(this)">🎥 Ride Cam</button>
+        <div class="hud">SAFARI SPRINT<br>SPEED <span class="spd">0 KM/H</span> · HEIGHT <span class="hgt">0 M</span> · <span class="pts">0</span> PTS</div>
+        <div class="hint">drag to orbit · scroll to zoom</div>
+        <div class="fallback">3D viewer needs an internet connection to load.<br>Check your connection and refresh.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="sec-alt">
+  <div class="wrap">
+    <span class="eyebrow reveal">Safety &amp; Compliance</span>
+    <h2 class="title reveal">A precondition, not a feature.</h2>
+    <div class="rule"></div>
+    <p class="lead reveal">Every attraction is engineered, inspected and certified to international standards — protecting both visitors and the investment.</p>
+    <div class="chips reveal" style="margin-top:20px">
+      <span class="chip-cert"><span class="tick">✓</span> ASTM F24</span>
+      <span class="chip-cert"><span class="tick">✓</span> EN 13814</span>
+      <span class="chip-cert"><span class="tick">✓</span> ISO 45001</span>
+      <span class="chip-cert"><span class="tick">✓</span> Dubai Civil Defence</span>
+    </div>
+    <div class="grid g4" style="margin-top:20px">
+      <div class="card reveal"><div class="big" style="color:var(--teal)">Daily</div><h3 style="margin-top:8px">Inspection Regime</h3><p>Every ride inspected and digitally logged before opening.</p></div>
+      <div class="card reveal"><div class="big" style="color:var(--teal)">99.7%</div><h3 style="margin-top:8px">Ride Availability</h3><p>Redundant braking and sensor systems on every attraction.</p></div>
+      <div class="card reveal"><div class="big" style="color:var(--teal)">Annual</div><h3 style="margin-top:8px">Structural Audit</h3><p>Independent review by accredited engineers each year.</p></div>
+      <div class="card reveal"><div class="big" style="color:var(--teal)">90s</div><h3 style="margin-top:8px">Response Standard</h3><p>On-site medical team across all operating hours.</p></div>
+    </div>
+    <p class="lead reveal" style="margin-top:22px;font-size:12.5px;color:var(--faint)">Note: Themed-universe concepts illustrate the experience format; commercial deployment is subject to licensing partnerships. Original Pixel World IP underpins the park where licences are not held.</p>
+
+    <div class="pager">
+      <a href="market.html"><div class="dir">← Previous</div><div class="pg">The Market</div></a>
+      <a href="financials.html" class="next"><div class="dir">Next →</div><div class="pg">Financials</div></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div class="brand"><span class="chip">P</span> <span>Pixel World</span></div>
+    <div>Pixel World · Dubai · Investor Pitch 2026</div>
+  </div>
+</footer>
+
+<script src="pixel_shared.js"></script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+/* ============ RIDE CONFIGS ============ */
+const RIDES = {
+  mario: {
+    color: 0xff2e4d, vMax: 20, ptsRate: 4,     // 20 m/s = 72 km/h
+    zones: [{from:0.05,to:0.26,v:3.5}],         // chain lift
+    stationT: 0.012,
+    points: [
+      [-46,3,0],[-36,3,0],[-26,3,0],            // station straight
+      [-16,9,0],[-4,18,1],[6,26,2],             // chain lift up
+      [16,5,4],                                  // first drop 55°
+      [26,15,6],[34,5,8],                        // airtime hill 1
+      [42,12,2],[46,6,-8],                       // hill 2 into turn
+      [40,8,-18],[28,4,-22],                     // turnaround
+      [14,11,-22],[2,4,-20],                     // airtime hill 3
+      [-12,8,-16],[-26,4,-10],[-38,3,-4]
+    ],
+    decorate(scene){
+      [[-4,12],[34,8],[28,-22]].forEach(([x,z])=>{
+        const m=new THREE.MeshStandardMaterial({color:0x2bb24c,roughness:0.4});
+        const pipe=new THREE.Mesh(new THREE.CylinderGeometry(2.2,2.2,6,12),m); pipe.position.set(x,3,z); scene.add(pipe);
+        const lip=new THREE.Mesh(new THREE.CylinderGeometry(2.8,2.8,1.5,12),m); lip.position.set(x,6.3,z); scene.add(lip);
+      });
+      [[26,20,6],[14,16,-22],[6,31,2]].forEach(([x,y,z])=>{
+        const b=new THREE.Mesh(new THREE.BoxGeometry(2.4,2.4,2.4),new THREE.MeshStandardMaterial({color:0xffcb05,emissive:0x553f00,roughness:0.3}));
+        b.position.set(x,y,z); b.userData.spin=true; scene.add(b);
+      });
+      const pole=new THREE.Mesh(new THREE.CylinderGeometry(0.22,0.22,15,8),new THREE.MeshStandardMaterial({color:0x8a8a99}));
+      pole.position.set(46,7.5,-8); scene.add(pole);
+      const flag=new THREE.Mesh(new THREE.ConeGeometry(1.5,3,4),new THREE.MeshStandardMaterial({color:0xff2e4d}));
+      flag.rotation.z=-Math.PI/2; flag.position.set(47.6,14,-8); scene.add(flag);
+    }
+  },
+  sonic: {
+    color: 0x3da5ff, vMax: 30.5, ptsRate: 6,    // 110 km/h
+    zones: [{from:0.0,to:0.13,v:30.5,launch:true}],
+    stationT: 0.02,
+    points: [
+      [-50,3,0],[-38,3,0],[-26,3,0],[-12,3,0],  // launch straight
+      [0,5,0],[10,12,0],                         // rise
+      [18,24,-1],[12,32,-3],[4,24,-5],[10,13,-7], // vertical loop (z-drift = corkscrew clearance)
+      [22,5,-9],[34,8,-14],                      // exit sprint
+      [42,16,-24],[32,20,-32],[18,12,-33],       // overbanked turn
+      [2,5,-30],[-14,9,-26],[-28,4,-20],[-42,5,-10]
+    ],
+    decorate(scene){
+      const ringMat=new THREE.MeshStandardMaterial({color:0xffcb05,emissive:0x6e5400,roughness:0.2,metalness:0.6});
+      [[-26,8,0],[34,13,-14],[-14,14,-26],[18,17,-33]].forEach(([x,y,z])=>{
+        const r=new THREE.Mesh(new THREE.TorusGeometry(2,0.4,10,24),ringMat);
+        r.position.set(x,y,z); r.userData.spin=true; scene.add(r);
+      });
+      [[-2,1.2,-30],[22,1.2,-9]].forEach(([x,y,z])=>{
+        const h=new THREE.Mesh(new THREE.BoxGeometry(6,2.4,6),new THREE.MeshStandardMaterial({color:0x2bb24c,roughness:0.6}));
+        h.position.set(x,y,z); scene.add(h);
+      });
+    }
+  },
+  pikachu: {
+    color: 0xffcb05, vMax: 25.5, ptsRate: 5,    // 92 km/h
+    zones: [{from:0.0,to:0.11,v:25.5,launch:true},{from:0.52,to:0.60,v:25.5,launch:true}],
+    stationT: 0.02,
+    points: [
+      [-48,3,8],[-34,3,10],[-20,3,11],[-6,3,12], // launch 1
+      [8,12,10],[18,21,4],[28,6,-2],             // camelback + drop
+      [38,4,-12],[30,8,-20],[18,4,-24],          // swerve round snorlax
+      [4,12,-24],[-8,4,-22],                     // airtime hop (launch 2 after)
+      [-20,9,-18],[-32,4,-12],[-42,4,-2]
+    ],
+    decorate(scene){
+      const body=new THREE.Mesh(new THREE.BoxGeometry(9,7,8),new THREE.MeshStandardMaterial({color:0x274069,roughness:0.7}));
+      body.position.set(24,3.5,-19); scene.add(body);
+      const head=new THREE.Mesh(new THREE.BoxGeometry(6,4.5,6),new THREE.MeshStandardMaterial({color:0x274069,roughness:0.7}));
+      head.position.set(24,9.2,-19); scene.add(head);
+      const belly=new THREE.Mesh(new THREE.BoxGeometry(7,4.5,1),new THREE.MeshStandardMaterial({color:0xf2e8d5,roughness:0.8}));
+      belly.position.set(24,3,-14.9); scene.add(belly);
+      [[-20,9,11],[4,17,-24]].forEach(([x,y,z])=>{
+        const b=new THREE.Mesh(new THREE.ConeGeometry(1.1,3.6,4),new THREE.MeshStandardMaterial({color:0xffcb05,emissive:0x6e5400}));
+        b.position.set(x,y,z); b.userData.spin=true; scene.add(b);
+      });
+      const gate=new THREE.Mesh(new THREE.TorusGeometry(4,0.45,8,4),new THREE.MeshStandardMaterial({color:0xffcb05,emissive:0x553f00}));
+      gate.position.set(-20,3.6,11); gate.rotation.y=Math.PI/2.2; scene.add(gate);
+    }
+  }
+};
+
+/* ============ REALISTIC TRACK BUILDER ============ */
+const SAMPLES=420;
+
+/* stable track frames: rails stay level through hills & turns,
+   and only invert smoothly through the vertical loop */
+function computeFrames(curve,n){
+  const tangents=[],normals=[],binormals=[];
+  const up=new THREE.Vector3(0,1,0);
+  let prevB=null;
+  for(let i=0;i<=n;i++){
+    const T=curve.getTangentAt((i%n)/n).clone().normalize();
+    let B=new THREE.Vector3().crossVectors(T,up);
+    if(B.lengthSq()<0.05) B=prevB?prevB.clone():new THREE.Vector3(1,0,0);
+    B.normalize();
+    if(prevB&&B.dot(prevB)<0) B.negate();
+    if(prevB) B.lerp(prevB,0.5).normalize();
+    const N=new THREE.Vector3().crossVectors(B,T).normalize();
+    tangents.push(T); binormals.push(B); normals.push(N);
+    prevB=B;
+  }
+  return {tangents,normals,binormals};
+}
+
+function buildTrack(scene,curve,color){
+  const frames=computeFrames(curve,SAMPLES);
+  const railMat=new THREE.MeshStandardMaterial({color:0xb8b8c8,roughness:0.35,metalness:0.7});
+  const glowMat=new THREE.MeshStandardMaterial({color:color,emissive:color,emissiveIntensity:0.55,roughness:0.4});
+  // twin rails offset along binormal (parallel-transport = no flipping in the loop)
+  [-0.7,0.7].forEach(off=>{
+    const pts=[];
+    for(let i=0;i<=SAMPLES;i++){
+      const p=curve.getPointAt(i/SAMPLES).clone();
+      p.addScaledVector(frames.binormals[i%SAMPLES],off);
+      pts.push(p);
+    }
+    const railCurve=new THREE.CatmullRomCurve3(pts,true);
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(railCurve,SAMPLES,0.14,8,true),railMat));
+  });
+  // glowing spine under the rails
+  const spinePts=[];
+  for(let i=0;i<=SAMPLES;i++){
+    const p=curve.getPointAt(i/SAMPLES).clone();
+    p.addScaledVector(frames.normals[i%SAMPLES],-0.45);
+    spinePts.push(p);
+  }
+  scene.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(spinePts,true),SAMPLES,0.22,8,true),glowMat));
+  // crossties
+  const tieGeo=new THREE.BoxGeometry(2,0.12,0.45);
+  const tieMat=new THREE.MeshStandardMaterial({color:0x3a3a4a,roughness:0.6});
+  const m=new THREE.Matrix4();
+  for(let i=0;i<SAMPLES;i+=5){
+    const tie=new THREE.Mesh(tieGeo,tieMat);
+    const p=curve.getPointAt(i/SAMPLES);
+    m.makeBasis(frames.binormals[i],frames.normals[i],frames.tangents[i]);
+    tie.quaternion.setFromRotationMatrix(m);
+    tie.position.copy(p).addScaledVector(frames.normals[i],-0.18);
+    scene.add(tie);
+  }
+  // supports down to ground
+  const supMat=new THREE.MeshStandardMaterial({color:0x2e2e3e,roughness:0.7});
+  for(let i=0;i<26;i++){
+    const p=curve.getPointAt(i/26);
+    if(p.y>2.4){
+      const s=new THREE.Mesh(new THREE.CylinderGeometry(0.25,0.4,p.y,6),supMat);
+      s.position.set(p.x,p.y/2,p.z); scene.add(s);
+      if(p.y>14){ // cross-brace tall supports
+        const b=new THREE.Mesh(new THREE.CylinderGeometry(0.12,0.12,p.y*0.7,5),supMat);
+        b.position.set(p.x+1.4,p.y*0.35,p.z); b.rotation.z=0.18; scene.add(b);
+      }
+    }
+  }
+  return frames;
+}
+
+function buildStation(scene,curve,t,color){
+  const p=curve.getPointAt(t), n=curve.getPointAt((t+0.02)%1);
+  const dir=n.clone().sub(p); dir.y=0; dir.normalize();
+  const g=new THREE.Group();
+  const plat=new THREE.Mesh(new THREE.BoxGeometry(16,1.2,7),new THREE.MeshStandardMaterial({color:0x1d1d28,roughness:0.8}));
+  plat.position.y=1.2; g.add(plat);
+  const roof=new THREE.Mesh(new THREE.BoxGeometry(16,0.5,8),new THREE.MeshStandardMaterial({color:color,roughness:0.5}));
+  roof.position.y=8.4; g.add(roof);
+  [[-7,3],[7,3],[-7,-3],[7,-3]].forEach(([x,z])=>{
+    const post=new THREE.Mesh(new THREE.CylinderGeometry(0.18,0.18,7,6),new THREE.MeshStandardMaterial({color:0x55556a}));
+    post.position.set(x,4.6,z); g.add(post);
+  });
+  g.position.set(p.x,0,p.z);
+  g.lookAt(p.x+dir.x,0,p.z+dir.z);
+  scene.add(g);
+}
+
+function buildTrain(scene,color){
+  const cars=[];
+  for(let i=0;i<4;i++){
+    const g=new THREE.Group();
+    const isLead=i===0;
+    const body=new THREE.Mesh(new THREE.BoxGeometry(3.4,1.2,2.2),
+      new THREE.MeshStandardMaterial({color:isLead?color:0x23232f,roughness:0.3,metalness:0.3,emissive:isLead?color:0x000000,emissiveIntensity:isLead?0.3:0}));
+    body.position.y=0.9; g.add(body);
+    if(isLead){ // nose cone
+      const nose=new THREE.Mesh(new THREE.ConeGeometry(1.05,1.6,4),new THREE.MeshStandardMaterial({color:color,roughness:0.3,metalness:0.3}));
+      nose.rotation.x=Math.PI/2; nose.rotation.y=Math.PI/4; nose.position.set(0,0.9,1.9); g.add(nose);
+    }
+    // riders (heads)
+    const headMat=[0xf2c9a0,0x8a5a2b,0xf2c9a0,0x5a3a1b];
+    for(let r=0;r<2;r++){
+      const head=new THREE.Mesh(new THREE.SphereGeometry(0.34,8,8),new THREE.MeshStandardMaterial({color:headMat[(i+r)%4],roughness:0.8}));
+      head.position.set(r===0?-0.7:0.7,1.85,0); g.add(head);
+    }
+    // restraint bar
+    const bar=new THREE.Mesh(new THREE.BoxGeometry(2.4,0.12,0.12),new THREE.MeshStandardMaterial({color:0x111118}));
+    bar.position.set(0,1.75,0.7); g.add(bar);
+    // wheels
+    const wGeo=new THREE.CylinderGeometry(0.3,0.3,0.25,10), wMat=new THREE.MeshStandardMaterial({color:0x0c0c12,roughness:0.5});
+    [[-1.2,0.25,0.85],[1.2,0.25,0.85],[-1.2,0.25,-0.85],[1.2,0.25,-0.85]].forEach(([x,y,z])=>{
+      const w=new THREE.Mesh(wGeo,wMat); w.rotation.z=Math.PI/2; w.position.set(x,y,z); g.add(w);
+    });
+    scene.add(g); cars.push(g);
+  }
+  return cars;
+}
+
+/* ============ VIEWER ============ */
+function buildRide(container){
+  const cfg=RIDES[container.dataset.ride];
+  const spdEl=container.querySelector('.spd'),ptsEl=container.querySelector('.pts'),hgtEl=container.querySelector('.hgt');
+
+  const scene=new THREE.Scene();
+  scene.background=new THREE.Color(0x08080d);
+  scene.fog=new THREE.Fog(0x08080d,100,200);
+
+  const camera=new THREE.PerspectiveCamera(58,1,0.1,500);
+  camera.position.set(60,38,66);
+
+  const renderer=new THREE.WebGLRenderer({antialias:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  container.prepend(renderer.domElement);
+
+  const controls=new OrbitControls(camera,renderer.domElement);
+  controls.enableDamping=true; controls.dampingFactor=0.08;
+  controls.autoRotate=true; controls.autoRotateSpeed=0.7;
+  controls.minDistance=25; controls.maxDistance=150;
+  controls.maxPolarAngle=Math.PI/2.05;
+  controls.target.set(0,8,0);
+
+  scene.add(new THREE.AmbientLight(0xffffff,0.5));
+  const key=new THREE.DirectionalLight(0xffffff,1.15); key.position.set(40,70,30); scene.add(key);
+  const rim=new THREE.DirectionalLight(cfg.color,0.55); rim.position.set(-40,25,-30); scene.add(rim);
+
+  const grid=new THREE.GridHelper(260,52,0x3a3a55,0x1c1c2e); scene.add(grid);
+  const floor=new THREE.Mesh(new THREE.PlaneGeometry(260,260),new THREE.MeshBasicMaterial({color:0x0a0a12}));
+  floor.rotation.x=-Math.PI/2; floor.position.y=-0.05; scene.add(floor);
+
+  const curve=new THREE.CatmullRomCurve3(cfg.points.map(p=>new THREE.Vector3(...p)),true,'catmullrom',0.55);
+  const frames=buildTrack(scene,curve,cfg.color);
+  buildStation(scene,curve,cfg.stationT,cfg.color);
+  const train=buildTrain(scene,cfg.color);
+  cfg.decorate(scene);
+  const spinners=[]; scene.traverse(o=>{if(o.userData&&o.userData.spin)spinners.push(o);});
+
+  function resize(){
+    const w=container.clientWidth,h=Math.max(container.clientHeight,380);
+    camera.aspect=w/h; camera.updateProjectionMatrix();
+    renderer.setSize(w,h);
+  }
+  new ResizeObserver(resize).observe(container); resize();
+
+  /* physics: 1 unit = 1 m. Gravity speed from peak height, chain/launch zones override */
+  const trackLen=curve.getLength();
+  let maxH=0; for(let i=0;i<=100;i++)maxH=Math.max(maxH,curve.getPointAt(i/100).y);
+  let t=0.0, v=4, pts=0, last=performance.now();
+  const tmpM=new THREE.Matrix4();
+
+  container._rideCam=false;
+  container._toggleCam=function(on){
+    container._rideCam=on;
+    controls.enabled=!on;
+    controls.autoRotate=!on;
+  };
+
+  function frame(now){
+    const dt=Math.min((now-last)/1000,0.05); last=now;
+    const pos=curve.getPointAt(t);
+    // target speed: energy conservation from highest point, floor of 6 m/s
+    let goal=Math.max(Math.sqrt(2*9.81*Math.max(maxH+2-pos.y,0.5))*0.82,6);
+    goal=Math.min(goal,cfg.vMax);
+    let inZone=false;
+    for(const z of cfg.zones){
+      if(t>=z.from&&t<=z.to){
+        inZone=true;
+        goal=z.v;
+        v += z.launch ? (goal-v)*Math.min(dt*6,1) : (goal-v)*Math.min(dt*3,1); // launches accelerate hard
+      }
+    }
+    if(!inZone) v += (goal-v)*Math.min(dt*1.8,1);
+    const tPrev=t;
+    t=(t+v*dt/trackLen)%1;
+    if(t<tPrev) pts=0;               // new lap → coin counter resets
+    pts=Math.min(pts+v*dt*cfg.ptsRate*0.4,999); // collected this ride, capped
+
+    for(let i=0;i<train.length;i++){
+      const tt=((t-i*4.2/trackLen)%1+1)%1;
+      const fi=Math.floor(tt*SAMPLES)%SAMPLES;
+      const p=curve.getPointAt(tt);
+      train[i].position.copy(p).addScaledVector(frames.normals[fi],0.25);
+      tmpM.makeBasis(frames.binormals[fi],frames.normals[fi],frames.tangents[fi]);
+      train[i].quaternion.setFromRotationMatrix(tmpM);
+    }
+    spinners.forEach(s=>{s.rotation.y+=0.02;});
+
+    if(container._rideCam){
+      const fi=Math.floor(t*SAMPLES)%SAMPLES;
+      const p=curve.getPointAt(t);
+      camera.position.copy(p).addScaledVector(frames.normals[fi],2.6).addScaledVector(frames.tangents[fi],-2.5);
+      const ahead=curve.getPointAt((t+8/trackLen)%1);
+      camera.up.copy(frames.normals[fi]);
+      camera.lookAt(ahead);
+    }else{
+      camera.up.set(0,1,0);
+      controls.update();
+    }
+
+    if(spdEl)spdEl.textContent=Math.round(v*3.6)+' KM/H';
+    if(hgtEl)hgtEl.textContent=Math.round(pos.y)+' M';
+    if(ptsEl)ptsEl.textContent=Math.round(pts);
+    renderer.render(scene,camera);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  container.dataset.ok='1';
+}
+
+window.pwToggleCam=function(btn){
+  const c=btn.closest('.v3d');
+  const on=!c._rideCam;
+  if(c._toggleCam)c._toggleCam(on);
+  btn.classList.toggle('on',on);
+  btn.textContent=on?'🎢 Orbit View':'🎥 Ride Cam';
+};
+
+try{
+  document.querySelectorAll('.v3d').forEach(buildRide);
+}catch(e){
+  document.querySelectorAll('.v3d').forEach(c=>c.classList.add('failed'));
+}
+setTimeout(()=>{
+  document.querySelectorAll('.v3d').forEach(c=>{if(!c.dataset.ok)c.classList.add('failed');});
+},4000);
+</script>
+</body>
+</html>
